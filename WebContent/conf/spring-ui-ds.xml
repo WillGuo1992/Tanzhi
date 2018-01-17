@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=" 
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+            ">
+
+	<bean id="ui_ds" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="driverUrl">
+			<value>jdbc:mysql://182.92.104.216:3306/mall_ui?useUnicode=true&amp;characterEncoding=utf8&amp;connectTimeout=300000&amp;socketTimeout=300000</value>
+		</property>
+		<property name="user" value="root" />
+		<property name="password" value="bus" />
+		<property name="alias" value="proxool_ui" />
+		<property name="prototypeCount" value="0" />
+		<property name="maximumConnectionCount" value="50" />
+		<property name="minimumConnectionCount" value="2" />
+		<property name="simultaneousBuildThrottle" value="50" />
+		<property name="houseKeepingTestSql" value="select CURRENT_DATE" />
+	</bean>
+
+	<bean id="uiJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="ui_ds" />
+		</property>
+	</bean>
+
+	<!--开启对注解的支持 -->
+	<bean id="uiTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ui_ds" />
+	</bean>
+	<tx:annotation-driven transaction-manager="uiTxManager" />
+
+	<bean id="uiSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ui_ds" />
+	</bean>
+
+	<bean id="AreaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.AreaMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+
+	<bean id="AreaPointMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.AreaPointMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="AreaCPointMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.AreaCPointMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="AreaTypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.AreaTypeMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="CompanyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.CompanyMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="GradationMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.GradationMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="LicenceMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.LicenceMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="MallMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.MallMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="DeviceMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.DeviceMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="MapMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.MapMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="StoreyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.StoreyMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="ManagerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.ManagerMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+	<bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.UserMapper" />
+		<property name="sqlSessionFactory" ref="uiSqlSessionFactory" />
+	</bean>
+	
+</beans>

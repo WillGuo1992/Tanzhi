@@ -1,0 +1,11 @@
+http://127.0.0.1:8080/NaviaAnalytics/jaxrs/hello
+
+http://127.0.0.1:8080/NaviaAnalytics/jaxrs/statistics/d
+
+分 时 日 月 周 user	command
+0 1 * * *	gaojie	curl http://127.0.0.1:8080/NaviaAnalytics/jaxrs/statistics/d(日统计)
+* * * * 0	gaojie	curl http://127.0.0.1:8080/NaviaAnalytics/jaxrs/statistics/w(周统计)
+* * 1 * *	gaojie	curl http://127.0.0.1:8080/NaviaAnalytics/jaxrs/statistics/m(月统计)
+* * * 1 *	gaojie  curl http://127.0.0.1:8080/NaviaAnalytics/jaxrs/statistics/y(年统计)
+
+ <selectKey keyProperty="id" resultType="int"> select max(id) as ID from analyse_day </selectKey>

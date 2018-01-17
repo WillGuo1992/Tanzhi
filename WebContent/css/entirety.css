@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+#tool_bar{
+	position: relative;margin: 10px 20px;height: 46px;background-color: black;
+}
+#top_tool_bar{
+	position: relative;margin: 70px 20px 0 20px;height: 46px;background-color: black;
+}
+.notitle_tool_bar{
+	position: relative;margin: 0px 20px;height: 46px;background-color: black;top: 10px;
+}
+#table_title_1{
+	background-color: #D64D54;
+}
+#table_title_2{
+	background-color: #07C4A6;
+}
+#table_data_1{
+	color: #D64D54;font-family: "微软雅黑";font-size: 30px;
+}
+#table_data_2{
+	color: #07C4A6;font-family: "微软雅黑";font-size: 30px;
+}
+#table_foot_1{
+	color: #D64D54;
+}
+#table_foot_2{
+	color: #07C4A6;
+}
+#box_1{
+	background-color: #44A5EC;
+}
+#box_2{
+	background-color: #D64D54;
+}
+#box_3{
+	background-color: #07C4A6;
+}
+#box_4{
+	background-color: #A079CA;
+}
+#today_count{
+	background: url(../img/1.png) no-repeat;
+}
+/*.yesterday_compare{
+	background: url(../img/jingling1.png) -603px -140px no-repeat;
+}
+.week_compare{
+	background: url(../img/jingling1.png) -603px -140px no-repeat;
+}
+.month_compare{
+	background: url(../img/jingling1.png) -603px -140px no-repeat;*/
+}
+.date_tool{
+	float: left;width:240px;height: 40px;margin-left: 20px;
+}
+.compare_date_tool{
+	float: right;width: 160px;height: 40px;margin-right: 20px;
+}

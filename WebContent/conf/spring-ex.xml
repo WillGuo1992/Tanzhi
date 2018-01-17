@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=" 
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+            ">
+	<!-- analyse_ds -->
+	<bean id="analyse_ex" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="driverUrl">
+			<value>jdbc:mysql://182.92.104.216:3306/navia_analytics?useUnicode=true&amp;characterEncoding=utf8&amp;connectTimeout=300000&amp;socketTimeout=300000</value>
+		</property>
+		<property name="user" value="root" />
+		<property name="password" value="bus" />
+		<property name="alias" value="proxool_ex" />
+		<property name="prototypeCount" value="0" />
+		<property name="maximumConnectionCount" value="50" />
+		<property name="minimumConnectionCount" value="2" />
+		<property name="simultaneousBuildThrottle" value="50" />
+		<property name="houseKeepingTestSql" value="select CURRENT_DATE" />
+	</bean>
+
+	<bean id="exJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="analyse_ex" />
+		</property>
+	</bean>
+
+	<!--开启对注解的支持 -->
+	<bean id="exTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="analyse_ex" />
+	</bean>
+	<tx:annotation-driven transaction-manager="exTxManager" />
+
+	<bean id="exSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="analyse_ex" />
+	</bean>
+
+	<bean id="AnalyseEXVendorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="cn.com.navia.ui.mybatis.dao.AnalyseEXVendorMapper" />
+		<property name="sqlSessionFactory" ref="exSqlSessionFactory" />
+	</bean>
+
+</beans>
